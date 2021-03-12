@@ -1,0 +1,95 @@
+/* style the header and title*/
+
+body{
+    background-image: url(https://i.pinimg.com/originals/81/30/e8/8130e855c4861d60c6fc93fa51dbc321.jpg);
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1%;
+    background-color: #13293d;
+    color: #fff;
+}
+
+/* style the button */
+#startButton{
+    display: flex;
+    margin-top: 30px;
+    align-items: center;
+    width: 100px;
+    height: 30px;
+    font-size: large;
+    background-color: rgb(228, 161, 36);
+    color: white;
+    border-radius: 5px;
+    box-shadow: 0 2px 0 2px rgb(44, 43, 43);
+    
+}
+/* style button section */
+
+#buttonSection{
+    display: flex;
+    justify-content: center;
+}
+
+
+
+/* style question section*/
+
+h2{
+    display: flex;
+    justify-content: center;
+    color: white;
+}
+
+#questionSection{
+    display: flex;
+    justify-content: center;
+}
+
+/* style answer buttons */
+#option1{
+    display: flex;
+    margin-top: 30px;
+    margin-right: 30px;
+    align-items: center;
+    width: 100px;
+    height: 30px;
+    font-size: large;
+    background-color: rgb(228, 161, 36);
+    color: white;
+    border-radius: 5px;
+    box-shadow: 0 2px 0 2px rgb(44, 43, 43);
+}
+
+#option2{
+    display: flex;
+    margin-top: 30px;
+    margin-right: 30px;
+    align-items: center;
+    width: 100px;
+    height: 30px;
+    font-size: large;
+    background-color: rgb(228, 161, 36);
+    color: white;
+    border-radius: 5px;
+    box-shadow: 0 2px 0 2px rgb(44, 43, 43);
+}
+
+#option3{
+    display: flex;
+    margin-top: 30px;
+    align-items: center;
+    width: 100px;
+    height: 30px;
+    font-size: large;
+    background-color: rgb(228, 161, 36);
+    color: white;
+    border-radius: 5px;
+    box-shadow: 0 2px 0 2px rgb(44, 43, 43);
+}
+
+
+/* make website media accessible */
