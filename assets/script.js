@@ -1,4 +1,6 @@
 //variables
+var playerData;
+var highScore;
 //extract timer text, question text and buttons from html
 var timer = document.getElementById('timerText');
 var question = document.getElementById('questionText');
@@ -9,16 +11,18 @@ var option3Button = document.getElementById('option3');
 var scoreText = document.getElementById('score');
 
 //create a series of questions
-var question1 = "What does a variable do?";
-var question2 = "What does a Function do?";
-var question3 = "What does 'element.textContent =' do?";
-var question4 = "What does 'element.addEventlistener('click', )' do?";
-var question5 = "What does an if statement do?";
-var question6 = "What does 'function(); do?";
+var questions = [
+  "What does a variable do?",
+  "What does 'function fucntionName(){}' do",
+  "What does 'element.textContent =' do?",
+  "What does 'element.addEventlistener('click', )' do?",
+  "What does an if statement do?",
+  "What does 'function(); do?"
+]
 
 //variables to track questions
-var questionsLeft = 6;
-var score = 0;
+var score = 1;
+var questionsLeft = 0;
 
 //timer variable
 var timeLeft = 30;
@@ -42,107 +46,214 @@ function countdown() {
         option2Button.textContent = "";
         option3Button.textContent = "";
         clearInterval(timeInterval);
+
+        if (score > highScore){
+          highScore = score;
+        }
+          playerData = window.prompt("Please Enter Initials for scoreboard: ") + score;
+        window.alert("Game Over. Current Score: " + score + " Click to play again.")
+        location.reload();
       }
     }, 2000);
   }
 
+//fucntion to check answers
 
-//start button function
-startButton.addEventListener('click', function(){
-    countdown();
-    //add answers to buttons 
-    question.textContent = question1;
-    option1Button.textContent = "Hold a value";
-    option2Button.textContent = "Define a function";
-    option3Button.textContent = "add an element";
-    
+  
+  
+
+
+  
 //question 1
-      //add event listeners to buttons
-      option1Button.addEventListener('click', function(){
-        question.textContent = question2;
-        score ++;
-        scoreText.textContent = "Score: " + score;
-        questionsLeft --;
+  function questionButtons(){
+  console.log(score);
 
-        option1Button.textContent = "Changes the text of an element";
-        option2Button.textContent = "Calls a function";
-        option3Button.textContent = "Define a function";
-      });
+    question.textContent = questions[0];
+
+  option1Button.textContent = "Hold a value"
+  option2Button.textContent = "Define a function"
+  option3Button.textContent = "Create a text element"
+
+  option1Button.addEventListener("click", function(){
+    score ++;
+    question2();
+    scoreText.textContent = "Score: " + score;
+  });
+    
+  option2Button.addEventListener("click", function(){
+    score --;
+    question2();
+    scoreText.textContent = "Score: " + score;
+  });
+  option3Button.addEventListener("click", function(){
+    score --;
+    question2();
+    scoreText.textContent = "Score: " + score;
+  });
+  }
+
+//question 2
+function question2(){
+  console.log(score);
   
-      option2Button.addEventListener('click', function(){
-        question.textContent = question2;
-        score --;
-        scoreText.textContent = "Score: " + score;
-        questionsLeft --;
+  question.textContent = questions[1];
 
-        option1Button.textContent = "change the text of an element";
-        option2Button.textContent = "Calls a function";
-        option3Button.textContent = "Define a function";
-      });
+  option1Button.textContent = "Repeat code"
+  option2Button.textContent = "Change the text of an element"
+  option3Button.textContent = "Call a fucntion"
+
+  option1Button.addEventListener("click", function(){
+    score --;
+    question3();
+    scoreText.textContent = "Score: " + score;
+  });
+  option2Button.addEventListener("click", function(){
+    score --;
+    question3();
+    scoreText.textContent = "Score: " + score;
+  });
+  option3Button.addEventListener("click", function(){
+    score ++;
+    question3();
+    scoreText.textContent = "Score: " + score;
+  });
+
+}
   
-      option3Button.addEventListener('click', function(){
-        question.textContent = question2;
-        score --;
-        scoreText.textContent = "Score: " + score;
-        questionsLeft --;
+//question 3
 
-        option1Button.textContent = "change the text of an element";
-        option2Button.textContent = "Calls a function";
-        option3Button.textContent = "Define a function";
-      });
-    
-//Question 2
-     //add event listeners to buttons
-     option1Button.addEventListener('click', function(){
-      question.textContent = question3;
-      score --;
-      scoreText.textContent = "Score: " + score;
-      questionsLeft --;
+function question3(){
+  console.log(score);
+  question.textContent = questions[2];
 
-      option1Button.textContent = "Tells Prgram to list for Event";
-      option2Button.textContent = "Changes the text of an element";
-      option3Button.textContent = "Holds a Value";
-    });
+  option1Button.textContent = "Change text of an element"
+  option2Button.textContent = "Define a Element"
+  option3Button.textContent = "Define a Fucntion"
 
-    option2Button.addEventListener('click', function(){
-      question.textContent = question3;
-      score --;
-      scoreText.textContent = "Score: " + score;
-      questionsLeft --;
-
-      option1Button.textContent = "Tells Prgram to list for Event";
-      option2Button.textContent = "Changes the text of an element";
-      option3Button.textContent = "Holds a Value";
-    });
-
-    option3Button.addEventListener('click', function(){
-      question.textContent = question3;
-      score ++;
-      scoreText.textContent = "Score: " + score;
-      questionsLeft --;
-
-      option1Button.textContent = "Tells Prgram to list for Event";
-      option2Button.textContent = "Changes the text of an element";
-      option3Button.textContent = "Holds a Value";
-    });
-
-//Question 3
+  option1Button.addEventListener("click", function(){
+    score ++;
+    question4();
+    scoreText.textContent = "Score: " + score;
+  });
+  option2Button.addEventListener("click", function(){
+    score --;
+    question4();
+    scoreText.textContent = "Score: " + score;
+  });
+  option3Button.addEventListener("click", function(){
+    score --;
+    question4();
+    scoreText.textContent = "Score: " + score;
+  });
+}
 
 
-//Question 4
+//question 4
+function question4(){
+  console.log(score);
+
+  question.textContent = questions[3];
+
+  option1Button.textContent = "Tells Buttons to listen for click"
+  option2Button.textContent = "Defines a function"
+  option3Button.textContent = "Holds a Value"
+
+  option1Button.addEventListener("click", function(){
+    score ++;
+    question5();
+    scoreText.textContent = "Score: " + score;
+  });
+  option2Button.addEventListener("click", function(){
+  score --;
+    question5();
+    scoreText.textContent = "Score: " + score;
+  });
+  option3Button.addEventListener("click", function(){
+  score --;
+    question5();
+    scoreText.textContent = "Score: " + score;
+  });
+}
 
 
-//Question 5
+
+//question 5
+function question5(){
+  console.log(score);
+
+  question.textContent = questions[4];
+
+  option1Button.textContent = "Creates and element"
+  option2Button.textContent = "Runs code according to conditonal statement"
+  option3Button.textContent = "Loops Code"
+
+  option1Button.addEventListener("click", function(){
+    score --;
+    question6();
+    scoreText.textContent = "Score: " + score;
+  });
+  option2Button.addEventListener("click", function(){
+    score ++;
+    question6();
+    scoreText.textContent = "Score: " + score;
+  });
+  option3Button.addEventListener("click", function(){
+    score --;
+    question6();
+    scoreText.textContent = "Score: " + score;
+  });
+}
 
 
-//Question 6
-    
+//question 6
+function question6(){
+  console.log(score);
 
-      
-    
+  question.textContent = questions[5];
+
+  option1Button.textContent = "Define a fucntion"
+  option2Button.textContent = "Calls a variable"
+  option3Button.textContent = "Call a function"
+
+  option1Button.addEventListener("click", function(){
+    score --;
+    endGame();
+  });
+  option2Button.addEventListener("click", function(){
+    score --;
+    endGame();
+  });
+  option3Button.addEventListener("click", function(){
+    score ++;
+    endGame();
+  });
+}
 
 
+//no questions left
+function endGame(){
+  if (score > highScore){
+    highScore = score;
+  }
+    playerData = window.prompt("Please Enter Initials for scoreboard: ") + score;
+    window.alert("Game Over. Current Score: " + score + " Click to play again.")
+    location.reload();
+}
+
+
+
+
+//fucntions for start button that calls button fucntions and countdown
+startButton.addEventListener("click", function(){
+  countdown();
+  scoreText.textContent = "Score = " + score;
+  
+  questionButtons();
+  
+  
 });
 
 
+
+ 
 
