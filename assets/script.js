@@ -1,28 +1,44 @@
-//variables
-var playerData;
-var highScore;
-//extract timer text, question text and buttons from html
-var timer = document.getElementById('timerText');
-var question = document.getElementById('questionText');
-var startButton = document.getElementById('startButton');
-var option1Button = document.getElementById('option1');
-var option2Button = document.getElementById('option2');
-var option3Button = document.getElementById('option3');
-var scoreText = document.getElementById('score');
+//variables for answer buttons points
+var buttonOnePoints;
+var buttonTwoPoints;
+var buttonThreePoints;
 
-//create a series of questions
+var score = 0;
+
+
+//grab buttons from document
+var startButton = document.querySelector('#startButton');
+var answerOne = document.querySelector("#answerOne");
+var answerTwo = document.querySelector("#answerTwo");
+var answerThree = document.querySelector("#answerThree");
+
+
+//grab text from document
+var questionText = document.querySelector("#questionText");
+var scoreText = document.querySelector("#scoreText");
+var timer = document.querySelector("#timerText");
+
+
+//variable to hold questions
 var questions = [
-  "What does a variable do?",
-  "What does 'function fucntionName(){}' do",
-  "What does 'element.textContent =' do?",
-  "What does 'element.addEventlistener('click', )' do?",
-  "What does an if statement do?",
-  "What does 'function(); do?"
-]
+    "What is JQuery?",
+    "How to you change the text of an Element?",
+    "how to you access the text of an Element?",
+    "What is a variable?",
+    "What is moment.js?",
+    "How do you add text to end of element string?"
+];
 
-//variables to track questions
-var score = 1;
-var questionsLeft = 0;
+
+//variable to hold right answers
+var answers = [
+    "A simplified JS library",
+    "element.textContent =",
+    "element.innerhtml",
+    "A container to hold a value",
+    "A time based JS library",
+    "element.append();"
+];
 
 //timer variable
 var timeLeft = 30;
@@ -42,218 +58,136 @@ function countdown() {
     }
       else {
         timer.textContent = 'Time Out!';
-        option1Button.textContent = "";
-        option2Button.textContent = "";
-        option3Button.textContent = "";
         clearInterval(timeInterval);
-
-        if (score > highScore){
-          highScore = score;
-        }
-          playerData = window.prompt("Please Enter Initials for scoreboard: ") + score;
+        playerData = window.prompt("Please Enter Initials for scoreboard: ") + " " + score.toString();
         window.alert("Game Over. Current Score: " + score + " Click to play again.")
+        localStorage.setItem("playerData", playerData);
         location.reload();
       }
-    }, 2000);
+    }, 1000);
   }
 
-//fucntion to check answers
+//fill in score board
+for (var i = 0; i < localStorage.length; i++){
+var tag = document.createElement("li");
+var text = document.createTextNode(localStorage.getItem(localStorage.key(i)));
+tag.appendChild(text);
+var element = document.querySelector("#scoreBoard")
+element.appendChild(tag);
 
-  
-  
+}
 
 
-  
-//question 1
-  function questionButtons(){
-  console.log(score);
+//variable to hold count
+var count = 0;
 
-    question.textContent = questions[0];
+//variable for correct answer
+var answer;
 
-  option1Button.textContent = "Hold a value"
-  option2Button.textContent = "Define a function"
-  option3Button.textContent = "Create a text element"
 
-  option1Button.addEventListener("click", function(){
-    score ++;
-    question2();
-    scoreText.textContent = "Score: " + score;
-  });
+//fucntion to display answers and tell which button is correct
+function displayAnswers(){
+    if (count == 0){
+        answerOne.textContent = answers[2];
+        answerTwo.textContent = answers[5];
+        answerThree.textContent = answers[0];
+
+        answer = 1;
+    }
+
+    else if (count == 1){
+        answerOne.textContent = answers[3];
+        answerTwo.textContent = answers[1];
+        answerThree.textContent = answers[4];
+
+        answer = 3;
+    }
+
+    else if (count == 2){
+        answerOne.textContent = answers[2];
+        answerTwo.textContent = answers[0];
+        answerThree.textContent = answers[5];
+
+        answer = 2;
+    }
+
+    else if (count == 3){
+        answerOne.textContent = answers[0];
+        answerTwo.textContent = answers[3];
+        answerThree.textContent = answers[4];
+
+        answer = 1;
+    }
+
+    else if (count == 4){
+        answerOne.textContent = answers[4];
+        answerTwo.textContent = answers[1];
+        answerThree.textContent = answers[5];
+
+        answer = 2;
+    }
+
+    else if (count == 5){
+        answerOne.textContent = answers[5];
+        answerTwo.textContent = answers[1];
+        answerThree.textContent = answers[0];
+
+        answer = 1;
+    }
+}
+
+//function for answer buttons
+function answerButtons(button, buttonId) {
+    button.addEventListener("click", function(event) {
+    console.log(count);
+    if (count <= 5){
+        questionText.textContent = questions[count];
+        displayAnswers();
+    }
+
+    else if (count == 6){
+        playerData = window.prompt("Please Enter Initials for scoreboard: ") + " " + score.toString();
+        window.alert("Game Over. Current Score: " + score + " Click to play again.")
+        localStorage.setItem(playerData, playerData);
+        location.reload();
+        
+    }
     
-  option2Button.addEventListener("click", function(){
-    score --;
-    question2();
-    scoreText.textContent = "Score: " + score;
-  });
-  option3Button.addEventListener("click", function(){
-    score --;
-    question2();
-    scoreText.textContent = "Score: " + score;
-  });
-  }
+    count++;
 
-//question 2
-function question2(){
-  console.log(score);
-  
-  question.textContent = questions[1];
+    if (buttonId == answer){
+        score ++;
+    }
 
-  option1Button.textContent = "Repeat code"
-  option2Button.textContent = "Change the text of an element"
-  option3Button.textContent = "Call a fucntion"
+    else if(buttonId != answer){
+        score --;
+        timeLeft = timeLeft - 5;
+    }
 
-  option1Button.addEventListener("click", function(){
-    score --;
-    question3();
-    scoreText.textContent = "Score: " + score;
-  });
-  option2Button.addEventListener("click", function(){
-    score --;
-    question3();
-    scoreText.textContent = "Score: " + score;
-  });
-  option3Button.addEventListener("click", function(){
-    score ++;
-    question3();
-    scoreText.textContent = "Score: " + score;
-  });
-
-}
-  
-//question 3
-
-function question3(){
-  console.log(score);
-  question.textContent = questions[2];
-
-  option1Button.textContent = "Change text of an element"
-  option2Button.textContent = "Define a Element"
-  option3Button.textContent = "Define a Fucntion"
-
-  option1Button.addEventListener("click", function(){
-    score ++;
-    question4();
-    scoreText.textContent = "Score: " + score;
-  });
-  option2Button.addEventListener("click", function(){
-    score --;
-    question4();
-    scoreText.textContent = "Score: " + score;
-  });
-  option3Button.addEventListener("click", function(){
-    score --;
-    question4();
-    scoreText.textContent = "Score: " + score;
-  });
+    scoreText.textContent = score;
+    
+    })
 }
 
+//print score
+scoreText.append(score);
 
-//question 4
-function question4(){
-  console.log(score);
+//function for start button
+startButton.addEventListener('click', function(){
+    countdown();
+    questionText.textContent = questions[0];
+    displayAnswers();
+    count ++;
+    console.log(count);
+})
 
-  question.textContent = questions[3];
-
-  option1Button.textContent = "Tells Buttons to listen for click"
-  option2Button.textContent = "Defines a function"
-  option3Button.textContent = "Holds a Value"
-
-  option1Button.addEventListener("click", function(){
-    score ++;
-    question5();
-    scoreText.textContent = "Score: " + score;
-  });
-  option2Button.addEventListener("click", function(){
-  score --;
-    question5();
-    scoreText.textContent = "Score: " + score;
-  });
-  option3Button.addEventListener("click", function(){
-  score --;
-    question5();
-    scoreText.textContent = "Score: " + score;
-  });
-}
-
-
-
-//question 5
-function question5(){
-  console.log(score);
-
-  question.textContent = questions[4];
-
-  option1Button.textContent = "Creates and element"
-  option2Button.textContent = "Runs code according to conditonal statement"
-  option3Button.textContent = "Loops Code"
-
-  option1Button.addEventListener("click", function(){
-    score --;
-    question6();
-    scoreText.textContent = "Score: " + score;
-  });
-  option2Button.addEventListener("click", function(){
-    score ++;
-    question6();
-    scoreText.textContent = "Score: " + score;
-  });
-  option3Button.addEventListener("click", function(){
-    score --;
-    question6();
-    scoreText.textContent = "Score: " + score;
-  });
-}
-
-
-//question 6
-function question6(){
-  console.log(score);
-
-  question.textContent = questions[5];
-
-  option1Button.textContent = "Define a fucntion"
-  option2Button.textContent = "Calls a variable"
-  option3Button.textContent = "Call a function"
-
-  option1Button.addEventListener("click", function(){
-    score --;
-    endGame();
-  });
-  option2Button.addEventListener("click", function(){
-    score --;
-    endGame();
-  });
-  option3Button.addEventListener("click", function(){
-    score ++;
-    endGame();
-  });
-}
-
-
-//no questions left
-function endGame(){
-  if (score > highScore){
-    highScore = score;
-  }
-    playerData = window.prompt("Please Enter Initials for scoreboard: ") + score;
-    window.alert("Game Over. Current Score: " + score + " Click to play again.")
-    location.reload();
-}
+//call fucntions for answer buttons
+answerButtons(answerOne, 1);
+answerButtons(answerTwo, 2);
+answerButtons(answerThree, 3);
 
 
 
 
-//fucntions for start button that calls button fucntions and countdown
-startButton.addEventListener("click", function(){
-  countdown();
-  scoreText.textContent = "Score = " + score;
-  
-  questionButtons();
-  
-  
-});
 
-
-
- 
 

@@ -4,38 +4,49 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lauryn's Coding Quiz</title>
-    <link rel="stylesheet" href="C:\Users\Lauryn\Documents\GitHub\Lauryns-coding-quiz\assets\style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="C:\Users\Lauryn\Desktop\carl-ott-fsf-pt-02-2021-u-c\04-Web-APIs\02-Homework\style.css">
+
 </head>
 <body>
-    <!-- header and title -->
     <header>
-        <h1>Lauryn's Magnificient Coding Quiz</h1>
+        <h1>Lauryn's Coding Quiz</h1>
     </header>
 
-    <p id="score">Score: </p>
+    <h3 id="timerText"></h3>
 
-    <section id="buttonSection">
-    <!-- start button -->
-        <button id="startButton">Start Quiz</button>
+    <section>
+
+        <div class="card" style="width: 30rem; height: 28rem; margin-left: auto; margin-right: auto; margin-top: 30px; text-align:center;">
+            <div class="card-body">
+                <h2>Quiz:</h2>
+
+                <button id="startButton" class="btn btn-dark btn-lg">Start</button>
+                
+                <h3 id="questionText"></h3>
+
+                <button id="answerOne" class="btn btn-dark">Answer One</button>
+                <button id="answerTwo" class="btn btn-dark">Answer Two</button>
+                <button id="answerThree"  class="btn btn-dark">Answer Three</button>
+        
+                <h3 id="outcomeText"></h3>
+        
+                <h3 id="scoreText">Score: </h4>
+            </div>
+          </div>
+        
     </section>
 
-    <!-- timer text -->
-    <h2 id="timerText"></h2>
-    
-  <!-- Questions text -->
-  <h2 id="questionText">Question:</h2>
+    <div  class="card" style="width: 30rem; height: auto; margin-left: auto; margin-right: auto; margin-top: 30px; text-align:center;">
+        <div id="scoreBoard" class="card-body">
+          <h5 class="card-title">ScoreBoard:</h5>
 
-    <section id="questionSection">
-    
-
-    <!-- answer buttons -->
-        <button id="option1"></button>
-        <button id="option2"></button>
-        <button id="option3"></button>
-
-    </section>
-    
-    <script src="C:\Users\Lauryn\Documents\GitHub\Lauryns-coding-quiz\assets\script.js"></script>
+          
+        </div>
+      </div>
     
 </body>
+
+<script src="C:\Users\Lauryn\Desktop\carl-ott-fsf-pt-02-2021-u-c\04-Web-APIs\02-Homework\script.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </html>
